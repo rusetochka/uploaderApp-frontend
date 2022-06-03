@@ -2,37 +2,73 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+input {
+  font-size: 1.5rem;
+  margin: 0.5rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+button {
+  font-size: 1rem;
+  border-radius: 5px;
+  padding: 0.25rem 0.5rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+.lib-section {
+  height: 40vh;
+}
+.lib-container {
+  margin: 0 1rem;
+  height: 80%;
+}
+.logo {
+  font-size: 2rem;
+  margin: 1rem;
+}
+.black {
+  color: #181E34;
+}
+.grey {
+  color: #8794C7;
+}
+.white {
+  color: #E0E3F0;
+}
+.bck {
+  background-color: #8794C7;
+}
+.bck-light {
+  background-color: #E0E3F0;
+}
+.bck-dark {
+  background-color: #181E34;
+}
+
+.nav-link, .navbar-brand, .navbar-toggler {
+  color: #E0E3F0;
+}
+.input-group {
+  align-self: center;
+  max-width: 800px;
+}
+#drop-zone {
+  height: 30vh;
+  border: 1px solid #181E34;
+  background-color: white;
+}
+#uploadForm {
+  width: 100%;
+}
+.form-control {
+  width: 80%;
 }
