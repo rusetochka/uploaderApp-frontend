@@ -66,9 +66,8 @@ export class File extends React.Component {
                 link.target = "_blank";
                 link.click();
             })
-        
-  
     }
+
     render() {
         const type = this.props.type;
         const idForP = "file-name-" + this.props.id;
