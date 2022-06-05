@@ -24,13 +24,6 @@ h2 {
   font-size: 1.5rem;
 }
 
-.lib-section {
-  height: 40vh;
-}
-.lib-container {
-  margin: 0 1rem;
-  height: 80%;
-}
 .logo {
   font-size: 2rem;
   margin: 1rem;
@@ -71,4 +64,7 @@ h2 {
 }
 .form-control {
   width: 80%;
+}
+.doc-icon {
+  width: 150px;
 }

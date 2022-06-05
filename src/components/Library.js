@@ -1,18 +1,59 @@
 import React from 'react';
+import { File } from './File';
+import { FileUpload } from './FileUpload';
 
 export class Library extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {files: ""};
+        this.loadFiles = this.loadFiles.bind(this);
     }
+
+    loadFiles() {
+        fetch("http://localhost:9000/testAPI/uploads")
+            .then(res => res.json())
+            .then(res => {
+                let resEdited = [];
+                for(let i = 0; i < res.length; i++) {
+                    const arr = res[i].split(".");
+                    const ext = arr[arr.length - 1];
+                    const name = arr.slice(0, arr.length - 1).join("");
+                    resEdited.push({id: i, name: name, ext: ext});
+                }
+                this.setState({files: resEdited});
+            });
+
+    }
+
+    componentDidMount() {
+        this.loadFiles();
+    }
+
+    componentDidUpdate() {
+
+    }
+
     render() {
-        return (<div className='lib-section bck pt-3'>
-        <h2>Your Documents Library</h2>
-        <div className='border border-secondary lib-container'>Here will be your files
-        <p>{this.props.apiRes}</p>
-        </div>
-        
-      </div>)
-    
+        if (this.state.files !== "") {
+            return (<div className='ck pt-3'>
+                <h2>Your Documents Library</h2>
+                <div className='border border-secondary d-flex flex-wrap'>
+                    {this.state.files.map(file => {
+                        return <File name={file.name} type={file.ext} key={file.id} id={file.id}/>
+                    })}
+                </div>
+                <FileUpload files={this.state.files}/>
+            </div>)
+        } else {
+            return (
+                <div className='bck pt-3'>
+                    <h2>Your Documents Library</h2>
+                    <p>Here will be your files</p>
+                    <FileUpload />
+                </div>
+            )
+        }
+
     }
   
 }

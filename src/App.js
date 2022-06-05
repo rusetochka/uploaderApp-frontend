@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 //import { SearchBar } from './components/SearchBar';
 import { Library } from './components/Library';
-import { FileUpload } from './components/FileUpload';
+
 
 import logo from './logo.png';
 
@@ -47,13 +47,7 @@ componentDidMount() {
     </nav>
         </header>
 
-        
-
-
-
         <Library apiRes={this.state.apiResponse} />
-
-        <FileUpload />
       </div>
     );
   }
