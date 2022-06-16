@@ -7,17 +7,7 @@ import { Library } from './components/Library';
 import logo from './logo.png';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {sharing: false};
-    this.sharingScreenToggle = this.sharingScreenToggle.bind(this);
-  }
 
-  sharingScreenToggle() {
-    if(this.state.sharing) {
-      this.setState({sharing: false})
-    }
-  }
 
   render() {
     return (
@@ -46,11 +36,7 @@ class App extends React.Component {
         </header>
 
         <Library />
-        <div className={this.state.sharing ? "position-absolute top-50 start-50 translate-middle bg-light w-50 h-50 d-flex justify-content-center align-items-center flex-column" : "d-none"} id='sharing-screen'>
-          <h2 className='h1 mx-3'>Share this document via link below</h2>
-          <input type="url" className='w-75 h1' value='' readOnly></input>
-          <button className='btn btn-dark' onClick={this.sharingScreenToggle}>Done</button>
-        </div>
+        
       </div>
     );
   }

@@ -5,23 +5,16 @@ import { FileUpload } from './FileUpload';
 export class Library extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {files: ""};
+        this.state = {
+            files: "",
+        };
         this.loadFiles = this.loadFiles.bind(this);
     }
 
     loadFiles() {
         fetch("http://localhost:9000/testAPI/uploads")
             .then(res => res.json())
-            .then(res => {
-                let resEdited = [];
-                for(let i = 0; i < res.length; i++) {
-                    const arr = res[i].split(".");
-                    const ext = arr[arr.length - 1];
-                    const name = arr.slice(0, arr.length - 1).join("");
-                    resEdited.push({id: i, name: name, ext: ext});
-                }
-                this.setState({files: resEdited});
-            });
+            .then(data => this.setState({files: data.documents}))
 
     }
 
@@ -39,9 +32,15 @@ export class Library extends React.Component {
                 <h2>Your Documents Library</h2>
                 <div className='border border-secondary d-flex flex-wrap'>
                     {this.state.files.map(file => {
-                        return <File name={file.name} type={file.ext} key={file.id} id={file.id}/>
+                        return <File name={file.filename} 
+                                     type={file.extention} 
+                                     key={file._id} 
+                                     id={file._id}
+                                     date={file.dateOfUpload}
+                                     size={file.size}/>
                     })}
                 </div>
+                
                 <FileUpload files={this.state.files}/>
             </div>)
         } else {
