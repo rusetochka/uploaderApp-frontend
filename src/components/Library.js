@@ -37,7 +37,8 @@ export class Library extends React.Component {
                                      key={file._id} 
                                      id={file._id}
                                      date={file.dateOfUpload}
-                                     size={file.size}/>
+                                     size={file.size}
+                                     downloaded={file.downloaded} />
                     })}
                 </div>
                 
