@@ -14,7 +14,8 @@ export class File extends React.Component {
         this.state = {
             edit: false,
             sharing: false,
-            link: ''
+            link: '',
+            checked: false
         };
         this.docIconChoosing = this.docIconChoosing.bind(this);
         this.downloadFile = this.downloadFile.bind(this);
@@ -23,6 +24,7 @@ export class File extends React.Component {
         this.formatDate = this.formatDate.bind(this);
         this.deleteDocument = this.deleteDocument.bind(this);
         this.shareFile = this.shareFile.bind(this);
+        this.chooseFileToggle = this.chooseFileToggle.bind(this);
     }
 
     docIconChoosing(type) {
@@ -50,10 +52,10 @@ export class File extends React.Component {
 
     downloadFile(e) {
         const id = e.target.parentElement.getAttribute("id");
-                let link = document.createElement('a');
-                link.href = `http://localhost:9000/testAPI/uploads/${id}`;
-                link.target = "_blank";
-                link.click();
+        let link = document.createElement('a');
+        link.href = `http://localhost:9000/testAPI/uploads/${id}`;
+        link.target = "_blank";
+        link.click();
     }
 
     sharingScreenToggle(e) {
@@ -94,6 +96,7 @@ export class File extends React.Component {
         const utc = new Date(d).toUTCString()
         return utc.toLocaleString();
     }
+
     deleteDocument(e) {
         const id = e.target.parentElement.getAttribute("id");
         fetch(`http://localhost:9000/testAPI/uploads/${id}`, {
@@ -102,12 +105,22 @@ export class File extends React.Component {
 
     }
 
+    chooseFileToggle(e) {
+        if(e.target.checked) {
+            this.setState({checked: true});
+            this.props.checkFile(this.props.id);
+        } else {
+            this.setState({checked: false});
+            this.props.uncheckFile(this.props.id);
+        }
+    }
 
     render() {
         const type = this.props.type;
         const actionForDelete = `http://localhost:9000/testAPI/uploads/${this.props.id}?_method=DELETE`;
 
         return (<div className='border border-dark rounded m-1 p-1 d-flex flex-column align-items-center justify-content-center'>
+            <input className="form-check-input align-self-start" type="checkbox" value="" id="chooseFile" onChange={this.chooseFileToggle}/>
             <img className="doc-icon mt-2" src={this.docIconChoosing(type)} alt="pdf-type-icon" />
 
             <p id={this.props.id} name={this.props.name} >{this.props.name}
