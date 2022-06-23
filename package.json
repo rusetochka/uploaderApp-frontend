@@ -15,7 +15,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest __tests__/ --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -36,5 +36,19 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@babel/core": "^7.18.5",
+    "@babel/plugin-syntax-jsx": "^7.17.12",
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-react": "^7.17.12",
+    "babel-jest": "^28.1.1",
+    "babel-loader": "^8.2.5",
+    "enzyme": "^3.11.0",
+    "html-webpack-plugin": "^5.5.0",
+    "jest": "^28.1.1",
+    "react-test-renderer": "^18.2.0",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.9.2"
+  }
 }

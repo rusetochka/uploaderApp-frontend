@@ -50,6 +50,7 @@ export class Library extends React.Component {
             link.target = "_blank";
             link.click();
         }
+        this.setState({checked: []});
 
         
     }

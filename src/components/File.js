@@ -126,7 +126,7 @@ export class File extends React.Component {
             <p id={this.props.id} name={this.props.name} >{this.props.name}
                 
                 <button className='d-block mx-auto mt-1' onClick={this.downloadFile}>Download</button>
-                <button className='d-block mx-auto mt-1' onClick={this.sharingScreenToggle}>Share</button>     
+                <button className='d-block mx-auto mt-1' onClick={this.sharingScreenToggle} id="share-btn">Share</button>     
             </p><br />
             <form method='POST' action={actionForDelete}>
                 <input type="hidden" name="_method" value="DELETE" />
