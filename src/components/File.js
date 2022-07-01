@@ -56,6 +56,11 @@ export class File extends React.Component {
         link.href = `http://localhost:9000/testAPI/uploads/${id}`;
         link.target = "_blank";
         link.click();
+        console.log('Downloading has started');
+        setTimeout(() => {
+            this.props.updateFiles();
+        }, 1000);
+        
     }
 
     sharingScreenToggle(e) {
@@ -97,11 +102,15 @@ export class File extends React.Component {
         return utc.toLocaleString();
     }
 
-    deleteDocument(e) {
+    async deleteDocument(e) {
         const id = e.target.parentElement.getAttribute("id");
-        fetch(`http://localhost:9000/testAPI/uploads/${id}`, {
-            method: 'DELETE'
-        });
+        await fetch(`http://localhost:9000/testAPI/uploads/${id}`)
+            .then(res => {
+                if(res.ok) {
+                    console.log('done!');
+                }
+            });
+        return this.props.updateFiles();
 
     }
 
@@ -118,25 +127,26 @@ export class File extends React.Component {
     render() {
         const type = this.props.type;
         const actionForDelete = `http://localhost:9000/testAPI/uploads/${this.props.id}?_method=DELETE`;
+        const altText = `${this.props.type} icon`;
 
         return (<div className='border border-dark rounded m-1 p-1 d-flex flex-column align-items-center justify-content-center'>
             <input className="form-check-input align-self-start" type="checkbox" value="" id="chooseFile" onChange={this.chooseFileToggle}/>
-            <img className="doc-icon mt-2" src={this.docIconChoosing(type)} alt="pdf-type-icon" />
+            <img className="doc-icon mt-2" src={this.docIconChoosing(type)} alt={altText} data-testid="4"/>
 
-            <p id={this.props.id} name={this.props.name} >{this.props.name}
+            <p id={this.props.id} name={this.props.name} data-testid='1'>{this.props.name}
                 
                 <button className='d-block mx-auto mt-1' onClick={this.downloadFile}>Download</button>
                 <button className='d-block mx-auto mt-1' onClick={this.sharingScreenToggle} id="share-btn">Share</button>     
             </p><br />
             <form method='POST' action={actionForDelete}>
                 <input type="hidden" name="_method" value="DELETE" />
-                <button className='d-block mx-auto mt-1 btn btn-danger'>Delete</button>
+                <button className='d-block mx-auto mt-1 btn btn-danger' data-testid='3'>Delete</button>
                 </form>
-            <p>Dowloaded: {this.props.downloaded} time(s)</p>
-            <p>Size: {this.floorTheSize(this.props.size)}</p>
+            <p data-testid='5'>Downloaded: {this.props.downloaded} time(s)</p>
+            <p data-testid='6'>Size: {this.floorTheSize(this.props.size)}</p>
             <p>Uploaded: {this.formatDate(this.props.date)}</p>
 
-            <div className={this.state.sharing ? "position-absolute top-50 start-50 translate-middle bg-light w-50 h-50 d-flex justify-content-center align-items-center flex-column" : "d-none"} id='sharing-screen'>
+            <div className={this.state.sharing ? "position-absolute top-50 start-50 translate-middle bg-light w-50 h-50 d-flex justify-content-center align-items-center flex-column" : "d-none"} id='sharing-screen' data-testid='2'>
                 <h2 className='h1 mx-3'>Share this document via link below</h2>
                 <p>This link is temporary available during 5 minutes</p>
                 <input type="url" className='w-75 h3' value={this.state.link} readOnly></input>

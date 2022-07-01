@@ -69,7 +69,9 @@ export class Library extends React.Component {
                                      size={file.size}
                                      downloaded={file.downloaded} 
                                      checkFile={this.choosingFiles}
-                                     uncheckFile={this.updatingChecked}/>
+                                     uncheckFile={this.updatingChecked}
+                                     updateFiles={this.loadFiles}
+                                     />
                     })}
                 </div>
                 
