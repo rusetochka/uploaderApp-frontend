@@ -106,7 +106,7 @@ export class File extends React.Component {
         const id = e.target.parentElement.getAttribute("id");
         await fetch(`http://localhost:9000/testAPI/uploads/${id}`)
             .then(res => {
-                if(res.ok) {
+                  if(res.ok) {
                     console.log('done!');
                 }
             });
